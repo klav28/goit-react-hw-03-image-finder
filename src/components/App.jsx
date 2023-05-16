@@ -38,9 +38,9 @@ export class App extends Component {
     return (
       <>
         <Searchbar onSearchSubmit={this.handleSearchSubmit} />
-        {this.state.imagesData.lenght > 0 && (
-          <ImageGallery imagesData={this.state.imagesData} />
-        )}
+        {/* {this.state.imagesData.lenght > 0 && ( */}
+        <ImageGallery imagesData={this.state.imagesData} />
+        {/* )} */}
       </>
     );
   }

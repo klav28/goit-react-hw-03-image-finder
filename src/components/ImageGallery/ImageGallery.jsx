@@ -6,7 +6,9 @@ export const ImageGallery = ({ imagesData }) => {
       <h2>IMAGE GALLERY</h2>
       <ul>
         {imagesData.map(el => (
-          <li>{el.previewURL}</li>
+          <li key={el.id}>
+            <img src={el.previewURL} alt={el.tags} />
+          </li>
         ))}
       </ul>
     </>
