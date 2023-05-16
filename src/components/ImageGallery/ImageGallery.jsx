@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export const ImageGallery = ({ imagesData, onImageClick }) => {
   return (
-    <>
+    <StyledGallery.Container>
       <StyledGallery>
         {imagesData.map(el => (
           <ImageGalleryItem
@@ -14,7 +14,7 @@ export const ImageGallery = ({ imagesData, onImageClick }) => {
           />
         ))}
       </StyledGallery>
-    </>
+    </StyledGallery.Container>
   );
 };
 

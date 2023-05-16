@@ -13,4 +13,11 @@ const StyledGallery = styled.ul`
   margin-right: auto;
 `;
 
+StyledGallery.Container = styled.div`
+  display: block;
+  width: 100%;
+  margin: 72px auto 0 auto;
+  padding: 15px;
+`;
+
 export default StyledGallery;

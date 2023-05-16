@@ -3,7 +3,7 @@ import { BsSearch } from 'react-icons/bs';
 
 export const Searchbar = ({ onSearchSubmit }) => {
   return (
-    <header>
+    <StyledSearchbar.Header>
       <StyledSearchbar>
         <StyledSearchbar.Form onSubmit={onSearchSubmit}>
           <StyledSearchbar.Button type="submit">
@@ -18,6 +18,6 @@ export const Searchbar = ({ onSearchSubmit }) => {
           />
         </StyledSearchbar.Form>
       </StyledSearchbar>
-    </header>
+    </StyledSearchbar.Header>
   );
 };

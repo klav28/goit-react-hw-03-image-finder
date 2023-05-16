@@ -3,7 +3,8 @@ import styled from 'styled-components';
 const StyledSearchbar = styled.div`
   top: 0;
   left: 0;
-  position: sticky;
+  position: fixed;
+  width: 100%;
   z-index: 1100;
   display: flex;
   justify-content: center;
@@ -59,6 +60,10 @@ StyledSearchbar.Input = styled.input`
     font: inherit;
     font-size: 18px;
   }
+`;
+
+StyledSearchbar.Header = styled.header`
+  width: 100%;
 `;
 
 export default StyledSearchbar;

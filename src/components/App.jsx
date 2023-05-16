@@ -12,7 +12,7 @@ export class App extends Component {
     queryString: '',
     imagesData: [],
     isLoading: false,
-    totalHits: 0,
+    totalPages: 0,
     isModalShow: false,
     largeImage: '',
     page: 1,
@@ -21,9 +21,12 @@ export class App extends Component {
   handleSearchSubmit = ev => {
     ev.preventDefault();
     const { querystring } = ev.target;
-    this.setState({ queryString: querystring.value });
-    this.setState({ page: 1 });
-    this.setState({ imagesData: [] });
+    this.setState({
+      queryString: querystring.value,
+      page: 1,
+      totalPages: 0,
+      imagesData: [],
+    });
   };
 
   handleImageClick = ev => {
@@ -52,7 +55,7 @@ export class App extends Component {
         const { data } = await pixabayAPI.fetchPhotos();
 
         this.setState({ imagesData: [...this.state.imagesData, ...data.hits] });
-        this.setState({ totalHits: data.totalHits });
+        this.setState({ totalPages: Math.trunc(data.totalHits / 12 + 1) });
       } catch {
         console.log(Error);
       } finally {
@@ -77,7 +80,7 @@ export class App extends Component {
             }}
           ></ModalWindow>
         )}
-        {this.state.page * 12 < this.state.totalHits && (
+        {this.state.page < this.state.totalPages && (
           <Button buttonText="LOAD MORE" onLoadMore={this.onLoadMore} />
         )}
       </>
