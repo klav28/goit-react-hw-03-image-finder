@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { ModalWindow } from './Modal/Modal';
+import { Button } from './Button/Button';
 import { PixabayAPI } from './Pixabay/pixabay_api';
 
 const pixabayAPI = new PixabayAPI();
@@ -14,7 +15,6 @@ export class App extends Component {
     totalHits: 0,
     isModalShow: false,
     largeImage: '',
-    isLoadMore: false,
     page: 1,
   };
 
@@ -23,6 +23,7 @@ export class App extends Component {
     const { querystring } = ev.target;
     this.setState({ queryString: querystring.value });
     this.setState({ page: 1 });
+    this.setState({ imagesData: [] });
   };
 
   handleImageClick = ev => {
@@ -34,18 +35,23 @@ export class App extends Component {
     this.setState({ isModalShow: true });
   };
 
+  onLoadMore = () => {
+    this.setState({ page: this.state.page + 1 });
+    console.log(this.state.page);
+  };
+
   async componentDidUpdate(_, prevState) {
     if (
       prevState.queryString !== this.state.queryString ||
-      this.state.isLoadMore
+      prevState.page < this.state.page
     ) {
       pixabayAPI.query = this.state.queryString;
       pixabayAPI.page = this.state.page;
       try {
         this.setState({ isLoading: true });
         const { data } = await pixabayAPI.fetchPhotos();
-        console.log(data);
-        this.setState({ imagesData: data.hits });
+
+        this.setState({ imagesData: [...this.state.imagesData, ...data.hits] });
         this.setState({ totalHits: data.totalHits });
       } catch {
         console.log(Error);
@@ -71,7 +77,9 @@ export class App extends Component {
             }}
           ></ModalWindow>
         )}
-        {this.state.page * 12 < this.state.totalHits && <h3>LOAD MORE</h3>}
+        {this.state.page * 12 < this.state.totalHits && (
+          <Button buttonText="LOAD MORE" onLoadMore={this.onLoadMore} />
+        )}
       </>
     );
   }
