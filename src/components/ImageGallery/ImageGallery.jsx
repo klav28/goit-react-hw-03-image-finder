@@ -1,16 +1,24 @@
-export const ImageGallery = ({ imagesData }) => {
-  console.log(imagesData);
+import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
+import StyledGallery from './ImageGallery.component';
+import PropTypes from 'prop-types';
 
+export const ImageGallery = ({ imagesData, onImageClick }) => {
   return (
     <>
-      <h2>IMAGE GALLERY</h2>
-      <ul>
+      <StyledGallery>
         {imagesData.map(el => (
-          <li key={el.id}>
-            <img src={el.previewURL} alt={el.tags} />
-          </li>
+          <ImageGalleryItem
+            key={el.id.toString()}
+            imageData={el}
+            onImageClick={onImageClick}
+          />
         ))}
-      </ul>
+      </StyledGallery>
     </>
   );
+};
+
+ImageGallery.propTypes = {
+  imagesData: PropTypes.array.isRequired,
+  onImageClick: PropTypes.func.isRequired,
 };

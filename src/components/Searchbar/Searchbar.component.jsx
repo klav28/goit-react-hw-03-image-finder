@@ -41,7 +41,7 @@ StyledSearchbar.Button = styled.button`
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   outline: none;
-  & hover {
+  &:hover {
     opacity: 1;
   }
 `;
@@ -55,7 +55,7 @@ StyledSearchbar.Input = styled.input`
   outline: none;
   padding-left: 4px;
   padding-right: 4px;
-  & placeholder {
+  &::placeholder {
     font: inherit;
     font-size: 18px;
   }
